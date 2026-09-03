@@ -1,0 +1,13 @@
+{
+  "dataset": "OULAD",
+  "cutoff_day": 60,
+  "rows": 30059,
+  "class_counts": {
+    "successful": 13871,
+    "at_risk": 16188
+  },
+  "excluded_no_early_assessment": 2534,
+  "features_observed_through_day": 60,
+  "target_source": "studentInfo.final_result",
+  "citation": "Kuzilek, J., Hlosta, M., & Zdrahal, Z. (2017). Open University Learning Analytics Dataset. Scientific Data, 4, 170171. https://doi.org/10.1038/sdata.2017.171"
+}

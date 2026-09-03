@@ -1,0 +1,13 @@
+{
+  "name": "StudySmart — Intelligent Study Planner",
+  "short_name": "StudySmart",
+  "description": "Course planning, assignments, focus sessions and OULAD academic early warning.",
+  "start_url": "/#/overview",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f7f1",
+  "theme_color": "#071a13",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}

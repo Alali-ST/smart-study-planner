@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07110d">
+  <meta name="studysmart-version" content="2026.09.03.1">
+  <meta name="theme-color" content="#071a13">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="description" content="An intelligent academic planning workspace for university students.">
+  <title>StudySmart — Intelligent Study Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css?v=2026.09.03.1">
+  <link rel="stylesheet" href="css/notifications.css?v=2026.09.03.1">
+</head>
+<body>
+  <svg class="svg-library" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6L12 2Zm7 13 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></symbol>
+    <symbol id="i-task" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 9 1.5 1.5L12 8m2 2h3M8 15h9"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Zm-8 12h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5m9.5 0A7 7 0 0 0 6 7.5L4 12m16 0-2 4.5A7 7 0 0 1 5.5 12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4H5v16h5m4-4 4-4-4-4m4 4H9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v5l3 2M9 2h6M12 2v3"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  </svg>
+
+  <div class="site-noise" aria-hidden="true"></div>
+
+  <section id="auth" class="auth-shell">
+    <div class="auth-brand-panel">
+      <div class="aurora aurora-one"></div><div class="aurora aurora-two"></div>
+      <a class="brand brand-light" href="#" aria-label="StudySmart home"><span class="brand-mark"><i></i><i></i><i></i></span><span>Study<span>Smart</span></span></a>
+      <div class="auth-hero-copy">
+        <span class="pill pill-glass"><span class="pulse-dot"></span> AI-powered academic planning</span>
+        <h1>A clearer path to your <em>best work.</em></h1>
+        <p>Transform courses, deadlines and study habits into a focused plan that evolves with you.</p>
+      </div>
+      <div class="orbit-visual" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+        <div class="orbit-core"><svg><use href="#i-spark"/></svg><span>Smart plan</span><strong>Ready</strong></div>
+        <div class="float-card float-one"><span class="mini-icon violet"><svg><use href="#i-book"/></svg></span><div><small>Next focus</small><strong>Machine Learning</strong></div></div>
+        <div class="float-card float-two"><span class="mini-icon green"><svg><use href="#i-chart"/></svg></span><div><small>Study rhythm</small><strong>+18% this week</strong></div></div>
+      </div>
+      <div class="auth-proof"><div class="avatar-stack"><span>TA</span><span>MO</span><span>ST</span></div><p><strong>Designed for focused students</strong><br>Plan less. Learn with intention.</p></div>
+    </div>
+
+    <div class="auth-form-panel">
+      <div class="mobile-brand"><a class="brand" href="#"><span class="brand-mark"><i></i><i></i><i></i></span><span>Study<span>Smart</span></span></a></div>
+      <div class="auth-card">
+        <div id="launchWarning" class="launch-warning" hidden>
+          <strong>Open StudySmart with its launcher</strong>
+          <p>This page was opened as a file, so account and study data cannot reach the server.</p>
+          <span>Double-click <b>START_STUDYSMART.bat</b> in the project folder, then use the page it opens.</span>
+        </div>
+        <p class="kicker">WELCOME BACK</p>
+        <h2 id="authTitle">Sign in to your workspace</h2>
+        <p id="authSubtitle" class="auth-subtitle">Continue building momentum, one focused session at a time.</p>
+        <div class="segmented" role="tablist" aria-label="Account action">
+          <button class="active" data-mode="login" role="tab" aria-selected="true">Sign in</button>
+          <button data-mode="register" role="tab" aria-selected="false">Create account</button>
+          <span class="segment-glider"></span>
+        </div>
+        <form id="authForm" novalidate>
+          <div id="registerFields" class="register-fields" hidden>
+            <label class="field"><span>Full name</span><input name="full_name" autocomplete="name" placeholder="e.g. Tobin Alali"></label>
+            <div class="field-row">
+              <label class="field"><span>Programme</span><input name="programme" placeholder="Software Engineering"></label>
+              <label class="field"><span>Level</span><input name="level" inputmode="numeric" placeholder="400"></label>
+            </div>
+          </div>
+          <label class="field"><span>University email</span><input required type="email" name="email" autocomplete="email" placeholder="you@university.edu"></label>
+          <label class="field"><span>Password</span><span class="password-wrap"><input required minlength="8" type="password" name="password" autocomplete="current-password" placeholder="At least 8 characters"><button type="button" id="showPassword" aria-label="Show password">Show</button></span></label>
+          <button class="primary-action" type="submit"><span>Enter workspace</span><svg><use href="#i-arrow"/></svg></button>
+          <p id="authError" class="form-error" role="alert"></p>
+        </form>
+        <div class="security-note"><span class="security-icon">✓</span><span>Your academic data is encrypted and access-controlled.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="app" class="app-shell" hidden>
+    <aside class="sidebar">
+      <a class="brand brand-light" href="#"><span class="brand-mark"><i></i><i></i><i></i></span><span>Study<span>Smart</span></span></a>
+      <nav class="side-nav" aria-label="Primary navigation">
+        <button class="active" data-page="overview"><svg><use href="#i-grid"/></svg><span>Overview</span></button>
+        <button data-page="planner"><svg><use href="#i-calendar"/></svg><span>Planner</span></button>
+        <button data-page="courses"><svg><use href="#i-book"/></svg><span>Courses</span></button>
+        <button data-page="assignments"><svg><use href="#i-task"/></svg><span>Assignments</span></button>
+        <button data-page="focus"><svg><use href="#i-clock"/></svg><span>Focus</span></button>
+        <button data-page="performance"><svg><use href="#i-chart"/></svg><span>Performance</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="focus-card focus-card-button" data-page="focus"><div class="focus-art"><span></span></div><p>Build your<br><strong>study streak</strong></p><small>Open focus timer →</small></button>
+        <button id="logout" class="logout-button"><svg><use href="#i-logout"/></svg><span>Log out</span></button>
+      </div>
+    </aside>
+
+    <div class="app-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuButton" aria-label="Open navigation"><span></span><span></span></button>
+        <div class="topbar-context"><span class="status-dot"></span><span id="pageContext">Your planner is up to date</span></div>
+        <div class="topbar-actions">
+          <div class="notification-wrap">
+            <button class="round-button" id="notificationButton" type="button" aria-label="Notifications" aria-haspopup="dialog" aria-controls="notificationPanel" aria-expanded="false"><svg><use href="#i-bell"/></svg><span class="notification-dot" id="notificationBadge" hidden></span></button>
+            <section class="notification-panel" id="notificationPanel" role="dialog" aria-label="Notifications" hidden>
+              <div class="notification-head"><div><small>STUDY REMINDERS</small><h2>Notifications</h2></div><button type="button" id="markAllNotifications">Mark all read</button></div>
+              <div class="notification-list" id="notificationList" aria-live="polite"></div>
+            </section>
+          </div>
+          <div class="user-chip"><span class="user-avatar" id="userInitials">ST</span><div><strong id="topbarName">Student</strong><small id="topbarProgramme">University student</small></div></div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="app-page active" data-page-content="overview">
+        <section class="dashboard-hero reveal">
+          <div><p class="kicker">ACADEMIC COMMAND CENTRE</p><h1>Make today count,<br><span id="studentName">Student</span>.</h1><p>Your intelligent planner has balanced the week around your workload and priorities.</p></div>
+          <button type="button" id="predict" class="predict-button" aria-haspopup="dialog" aria-controls="predictionDialog" onclick="openPrediction(event)"><span class="predict-icon"><svg><use href="#i-spark"/></svg></span><span><small>OULAD EARLY WARNING</small>Check academic risk</span><svg class="arrow-icon"><use href="#i-arrow"/></svg></button>
+        </section>
+
+        <section class="metric-grid reveal" id="metrics">
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon mint"><svg><use href="#i-book"/></svg></span><span class="metric-trend">Active</span></div><strong id="courseCount">0</strong><p>Registered courses</p><div class="micro-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon coral"><svg><use href="#i-task"/></svg></span><span class="metric-trend warn">Needs focus</span></div><strong id="taskCount">0</strong><p>Pending assignments</p><div class="metric-foot"><span>Stay ahead of deadlines</span><svg><use href="#i-arrow"/></svg></div></article>
+          <article class="metric-card progress-card"><div class="metric-top"><span class="metric-icon blue"><svg><use href="#i-chart"/></svg></span><span class="metric-trend">Weekly</span></div><div class="progress-layout"><div><strong id="progress">0%</strong><p>Study progress</p></div><div class="progress-ring" id="progressRing" style="--progress:0"><span></span></div></div><div class="metric-foot"><span>Consistency builds results</span></div></article>
+          <article class="metric-card prediction-card"><div class="prediction-glow"></div><div class="metric-top"><span class="metric-icon lime"><svg><use href="#i-spark"/></svg></span><span class="metric-trend light" id="riskBadge">OULAD · RF</span></div><strong id="outcome">—</strong><p id="predictionCourseLabel">Select a course to assess</p><div class="confidence"><span>Predicted outcome likelihood</span><div><i id="confidenceBar"></i></div><b id="confidenceText">Awaiting assessment</b></div></article>
+        </section>
+
+        <section id="recommendation" class="insight-banner reveal" hidden><span class="insight-symbol"><svg><use href="#i-spark"/></svg></span><div><small>PERSONALIZED RECOMMENDATION</small><p id="recommendationText"></p></div><button aria-label="Dismiss recommendation" id="dismissRecommendation">×</button></section>
+
+        <div class="dashboard-grid">
+          <section class="surface schedule-surface reveal" id="schedulePanel">
+            <div class="surface-head"><div><span class="section-kicker">SMART TIMETABLE</span><h2>Your focus plan</h2></div><button id="regenerate" class="ghost-button"><svg><use href="#i-refresh"/></svg><span>Regenerate</span></button></div>
+            <div class="week-strip" id="weekStrip" aria-label="Current week"></div>
+            <div id="schedule" class="schedule-list" aria-live="polite"></div>
+          </section>
+
+          <aside class="side-column">
+            <section class="surface form-surface reveal" id="coursePanel">
+              <button class="collapsible-head" type="button" aria-expanded="true"><span class="metric-icon mint"><svg><use href="#i-book"/></svg></span><span><small>ACADEMIC SETUP</small><strong>Add a course</strong></span><i>−</i></button>
+              <form id="courseForm" class="quick-form">
+                <div class="field-row"><label class="field compact"><span>Course code</span><input required name="course_code" placeholder="SEN401"></label><label class="field compact grow"><span>Course title</span><input required name="course_title" placeholder="Machine Learning"></label></div>
+                <div class="three-fields"><label class="field compact"><span>Units</span><input required type="number" min="1" name="credit_unit" placeholder="3"></label><label class="field compact"><span>Semester</span><input required name="semester" placeholder="First"></label><label class="field compact"><span>Difficulty</span><input type="number" min="1" max="5" name="difficulty" placeholder="1–5"></label></div>
+                <button class="secondary-action"><svg><use href="#i-plus"/></svg> Save course</button>
+              </form>
+            </section>
+            <section class="surface form-surface reveal" id="taskPanel">
+              <button class="collapsible-head" type="button" aria-expanded="true"><span class="metric-icon coral"><svg><use href="#i-task"/></svg></span><span><small>DEADLINE TRACKER</small><strong>Add assignment</strong></span><i>−</i></button>
+              <form id="taskForm" class="quick-form">
+                <label class="field compact"><span>Course</span><select required name="course_id" id="courseSelect"><option value="">Select course</option></select></label>
+                <label class="field compact"><span>Assignment title</span><input required name="title" placeholder="e.g. Model evaluation report"></label>
+                <div class="field-row"><label class="field compact grow"><span>Due date</span><input required type="datetime-local" name="due_date"></label><label class="field compact"><span>Weight</span><input type="number" name="weight" placeholder="20%"></label></div>
+                <button class="secondary-action"><svg><use href="#i-plus"/></svg> Save assignment</button>
+              </form>
+            </section>
+            <section class="surface insight-card reveal" id="insightPanel"><div class="insight-orbit"><span></span><span></span><svg><use href="#i-spark"/></svg></div><small>SMART INSIGHT</small><h3>Small sessions.<br>Serious momentum.</h3><p>Your plan automatically prioritizes difficult courses and approaching deadlines.</p></section>
+          </aside>
+        </div>
+        <section class="surface course-progress-surface reveal" aria-labelledby="courseProgressTitle">
+          <div class="surface-head"><div><span class="section-kicker">COURSE PROGRESS</span><h2 id="courseProgressTitle">Your academic momentum</h2><p>Completed assessment weight is tracked separately for each registered course.</p></div><span class="progress-method">Not a grade prediction</span></div>
+          <div id="courseProgressGrid" class="course-progress-grid" aria-live="polite"></div>
+        </section>
+        </section>
+
+        <section class="app-page" data-page-content="courses">
+          <header class="page-heading"><div><span class="section-kicker">ACADEMIC CATALOGUE</span><h1>Your courses</h1><p>Everything you are studying, organised by semester and priority.</p></div><span class="page-count" id="coursePageCount">0 courses</span></header>
+          <div class="management-layout">
+            <section class="surface page-surface"><div class="surface-head"><div><span class="section-kicker">ACTIVE COURSES</span><h2>Course catalogue</h2></div></div><div id="courseGrid" class="course-grid"></div></section>
+            <aside class="surface page-form-card"><div class="form-card-head"><span class="metric-icon mint"><svg><use href="#i-plus"/></svg></span><div><small>NEW COURSE</small><h2>Add a course</h2></div></div>
+              <form id="courseFormPage" class="page-form">
+                <label class="field"><span>Course code</span><input required name="course_code" placeholder="SEN401"></label>
+                <label class="field"><span>Course title</span><input required name="course_title" placeholder="Machine Learning"></label>
+                <div class="field-row"><label class="field"><span>Units</span><input required type="number" min="1" max="12" name="credit_unit" value="3"></label><label class="field"><span>Difficulty</span><input required type="number" min="1" max="5" name="difficulty" value="3"></label></div>
+                <label class="field"><span>Semester</span><input required name="semester" placeholder="First semester"></label>
+                <label class="field"><span>Examination date (optional)</span><input type="datetime-local" name="examination_date"></label>
+                <button class="secondary-action" type="submit"><svg><use href="#i-plus"/></svg> Save course</button>
+              </form>
+            </aside>
+          </div>
+        </section>
+
+        <section class="app-page" data-page-content="assignments">
+          <header class="page-heading"><div><span class="section-kicker">DEADLINE CENTRE</span><h1>Assignments</h1><p>Plan upcoming work and keep finished assignments out of the way.</p></div><div class="filter-tabs" role="tablist"><button class="active" data-assignment-filter="pending">Active</button><button data-assignment-filter="completed">Completed</button><button data-assignment-filter="all">All</button></div></header>
+          <div class="management-layout">
+            <section class="surface page-surface"><div id="assignmentList" class="assignment-list"></div></section>
+            <aside class="surface page-form-card"><div class="form-card-head"><span class="metric-icon coral"><svg><use href="#i-plus"/></svg></span><div><small>NEW DEADLINE</small><h2>Add assignment</h2></div></div>
+              <form id="taskFormPage" class="page-form">
+                <label class="field"><span>Course</span><select required name="course_id" id="courseSelectPage"><option value="">Select course</option></select></label>
+                <label class="field"><span>Assignment title</span><input required name="title" placeholder="Model evaluation report"></label>
+                <label class="field"><span>Due date</span><input required type="datetime-local" name="due_date"></label>
+                <label class="field"><span>Assessment weight (%)</span><input type="number" min="0" max="100" name="weight" value="10"></label>
+                <button class="secondary-action" type="submit"><svg><use href="#i-plus"/></svg> Save assignment</button>
+              </form>
+            </aside>
+          </div>
+        </section>
+
+        <section class="app-page" data-page-content="planner">
+          <header class="page-heading"><div><span class="section-kicker">LIVE ACADEMIC CALENDAR</span><h1>Your planner</h1><p>Study sessions, deadlines and examinations in one calendar.</p></div><button id="regeneratePlanner" class="ghost-button"><svg><use href="#i-refresh"/></svg><span>Regenerate timetable</span></button></header>
+          <section class="surface calendar-surface">
+            <div class="calendar-toolbar"><div><button id="calendarPrev" aria-label="Previous month"><svg><use href="#i-left"/></svg></button><button id="calendarToday">Today</button><button id="calendarNext" aria-label="Next month"><svg><use href="#i-right"/></svg></button></div><h2 id="calendarTitle"></h2><div class="calendar-legend"><span class="study">Study</span><span class="deadline">Deadline</span><span class="exam">Exam</span></div></div>
+            <div class="calendar-weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+            <div id="calendarGrid" class="calendar-grid"></div>
+          </section>
+          <section class="surface agenda-surface"><div class="surface-head"><div><span class="section-kicker">SELECTED DAY</span><h2 id="agendaTitle">Today</h2></div><label class="completed-toggle"><input id="showCompletedSessions" type="checkbox"> Show completed items</label></div><div id="dayAgenda" class="agenda-list"></div></section>
+        </section>
+
+        <section class="app-page" data-page-content="focus">
+          <header class="page-heading"><div><span class="section-kicker">DISTRACTION-FREE STUDY</span><h1>Focus room</h1><p>Time deliberate study sessions and build a dependable rhythm.</p></div><button id="enableAlerts" class="ghost-button"><svg><use href="#i-bell"/></svg><span>Enable finish alert</span></button></header>
+          <div class="focus-layout">
+            <section class="surface timer-surface">
+              <div class="timer-presets"><button class="active" data-preset="25,5">25 / 5</button><button data-preset="50,10">50 / 10</button><button data-preset="custom">Custom</button></div>
+              <div id="timerLinkNotice" class="timer-link-notice" hidden></div>
+              <div class="timer-ring" id="timerRing"><div><span id="timerMode">FOCUS SESSION</span><strong id="timerDisplay">25:00</strong><small id="timerCycleText">Ready when you are</small></div></div>
+              <div class="timer-controls"><button id="timerReset" class="timer-secondary" aria-label="Reset timer"><svg><use href="#i-refresh"/></svg></button><button id="timerStart" class="timer-primary">Start focus</button><button id="timerSkip" class="timer-secondary" aria-label="Skip current interval"><svg><use href="#i-right"/></svg></button></div>
+              <div id="customTimerSettings" class="custom-timer-settings" hidden><label class="field"><span>Focus minutes</span><input id="customFocusMinutes" type="number" min="1" max="180" value="25"></label><label class="field"><span>Break minutes</span><input id="customBreakMinutes" type="number" min="1" max="60" value="5"></label><button id="applyCustomTimer" class="ghost-button">Apply</button></div>
+              <div class="timer-context"><label class="field"><span>Course (optional)</span><select id="focusCourse"><option value="">General study</option></select></label><label class="field"><span>Assignment (optional)</span><select id="focusAssignment"><option value="">No assignment</option></select></label></div>
+            </section>
+            <aside class="focus-side">
+              <div class="focus-stat-grid"><article class="surface focus-stat"><small>TODAY</small><strong id="focusToday">0</strong><span>focused minutes</span></article><article class="surface focus-stat"><small>THIS WEEK</small><strong id="focusWeek">0</strong><span>focused minutes</span></article></div>
+              <section class="surface focus-history-card"><div class="surface-head"><div><span class="section-kicker">RECENT MOMENTUM</span><h2>Focus history</h2></div></div><div id="focusHistory" class="focus-history"></div></section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="app-page" data-page-content="performance">
+          <header class="page-heading"><div><span class="section-kicker">OULAD EARLY WARNING</span><h1>Academic performance</h1><p>Understand current assessment patterns and act on them early.</p></div><button type="button" id="predictPage" class="predict-button" aria-haspopup="dialog" aria-controls="predictionDialog" onclick="openPrediction(event)"><span class="predict-icon"><svg><use href="#i-spark"/></svg></span><span><small>RANDOM FOREST</small>Run new assessment</span><svg class="arrow-icon"><use href="#i-arrow"/></svg></button></header>
+          <div class="performance-layout">
+            <article class="metric-card prediction-card performance-prediction"><div class="prediction-glow"></div><div class="metric-top"><span class="metric-icon lime"><svg><use href="#i-spark"/></svg></span><span class="metric-trend light" id="performanceRiskBadge">OULAD · RF</span></div><strong id="performanceOutcome">—</strong><p id="performanceCourseLabel">Select a course to assess</p><div class="confidence"><span>Predicted outcome likelihood</span><div><i id="performanceConfidenceBar"></i></div><b id="performanceConfidenceText">Awaiting assessment</b></div></article>
+            <section class="surface performance-explainer"><span class="section-kicker">HOW TO READ THIS</span><h2>A course-level early signal</h2><p>For the selected course, the model compares assessment completion, scores and submission timing during the first 60 days with historical OULAD module patterns. It estimates the likelihood of passing that course; use the result to guide support—not as a guaranteed final result.</p><div id="performanceRecommendation" class="performance-recommendation">Select a registered course and run an assessment to receive a personalized recommendation.</div></section>
+          </div>
+          <section class="surface page-surface prediction-history-surface"><div class="surface-head"><div><span class="section-kicker">HISTORY</span><h2>Course assessment history</h2></div></div><div id="predictionHistory" class="prediction-history"></div></section>
+        </section>
+      </main>
+    </div>
+    <nav class="mobile-dock" aria-label="Mobile navigation"><button class="active" data-page="overview"><svg><use href="#i-grid"/></svg><span>Overview</span></button><button data-page="planner"><svg><use href="#i-calendar"/></svg><span>Planner</span></button><button data-page="focus"><svg><use href="#i-clock"/></svg><span>Focus</span></button><button data-page="courses"><svg><use href="#i-book"/></svg><span>Courses</span></button><button data-page="assignments"><svg><use href="#i-task"/></svg><span>Tasks</span></button></nav>
+  </section>
+
+  <dialog id="predictionDialog" class="prediction-dialog" aria-labelledby="predictionTitle">
+    <form id="predictionForm" method="dialog">
+      <div class="dialog-head"><div><span class="section-kicker">OULAD · FIRST 60 DAYS</span><h2 id="predictionTitle">Predict a course outcome</h2><p>Select one of your registered courses and enter its early assessment activity. The model estimates whether that course is <strong>likely to be passed</strong> or <strong>at risk of not being passed</strong>.</p></div><button type="button" class="dialog-close" id="closePrediction" aria-label="Close">×</button></div>
+      <div class="prediction-fields">
+        <label class="field prediction-course-field"><span>1. Choose the registered course you want to assess</span><select required name="course_id" id="predictionCourse"><option value="">Select a registered course</option></select><small>This selection is required. All information below must relate only to this course.</small></label>
+        <label class="field"><span>Previous attempts</span><input required type="number" min="0" step="1" name="previous_attempts" value="0"><small>Earlier attempts at this module</small></label>
+        <label class="field"><span>Assessments due</span><input required type="number" min="1" step="1" name="assessments_due" value="3"><small>Assessments due by day 60</small></label>
+        <label class="field"><span>Assessments submitted</span><input required type="number" min="0" step="1" name="assessments_submitted" value="3"><small>Submissions made by day 60</small></label>
+        <label class="field"><span>Average score (%)</span><input required type="number" min="0" max="100" step="0.1" name="mean_score" value="65"><small>Mean score received so far</small></label>
+        <label class="field"><span>On-time submissions</span><input required type="number" min="0" step="1" name="on_time_submissions" value="3"><small>Submitted on or before deadline</small></label>
+        <label class="field"><span>Average submission delay (days)</span><input required type="number" step="0.1" name="mean_submission_delay" value="-1"><small>Negative means submitted early</small></label>
+      </div>
+      <p class="prediction-note">The course code identifies which course is being assessed; the prediction itself uses that course's completion, score and submission-timing values. Pass means the OULAD successful class (Pass/Distinction), while at risk includes historical Fail/Withdrawn outcomes.</p>
+      <div class="dialog-actions"><button type="button" class="ghost-button" id="cancelPrediction">Cancel</button><button type="submit" class="secondary-action"><svg><use href="#i-spark"/></svg><span>Run course assessment</span></button></div>
+    </form>
+  </dialog>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="toast" class="toast custom-toast" role="status"><div class="toast-body"></div></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js?v=2026.09.03.1"></script>
+</body>
+</html>
