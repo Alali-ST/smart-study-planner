@@ -9,15 +9,15 @@ from .extensions import db, jwt, migrate
 
 
 def create_app(test_config=None):
-    database_url = os.getenv("DATABASE_URL", "sqlite:///smart_study_planner.db")
+    database_url = os.getenv("DATABASE_URL") or "sqlite:///smart_study_planner.db"
     if database_url.startswith("mysql://"):
         database_url = "mysql+pymysql://" + database_url[len("mysql://"):]
     app = Flask(__name__, static_folder="../../web", static_url_path="")
     app.config.from_mapping(
-        APP_VERSION="2026.09.03.1",
-        SECRET_KEY=os.getenv("SECRET_KEY", "development-only"),
-        JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY", "development-jwt-only"),
-        JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=int(os.getenv("SESSION_HOURS", "8"))),
+        APP_VERSION="2026.09.03.2",
+        SECRET_KEY=os.getenv("SECRET_KEY") or "development-only",
+        JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY") or "development-jwt-only",
+        JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=int(os.getenv("SESSION_HOURS") or "8")),
         SQLALCHEMY_DATABASE_URI=database_url,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         MODEL_PATH=os.getenv("MODEL_PATH", "instance/oulad_random_forest.joblib"),
@@ -27,7 +27,7 @@ def create_app(test_config=None):
     db.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
-    CORS(app, resources={r"/api/*": {"origins": os.getenv("CORS_ORIGINS", "*").split(",")}})
+    CORS(app, resources={r"/api/*": {"origins": (os.getenv("CORS_ORIGINS") or "*").split(",")}})
 
     from .api import api
     app.register_blueprint(api, url_prefix="/api/v1")
