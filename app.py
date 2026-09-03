@@ -15,6 +15,6 @@ app = create_app()
 
 # A fresh hosted MySQL database can be initialized without a separate shell.
 # create_all is idempotent and does not remove existing student records.
-if os.getenv("DATABASE_URL"):
+if os.getenv("DATABASE_URL") or os.getenv("TIDB_HOST") or os.getenv("VERCEL"):
     with app.app_context():
         db.create_all()

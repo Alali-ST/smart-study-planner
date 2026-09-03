@@ -2,6 +2,7 @@ import os
 import csv
 import click
 from datetime import timedelta
+from urllib.parse import quote_plus
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from sqlalchemy import inspect, text
@@ -9,7 +10,18 @@ from .extensions import db, jwt, migrate
 
 
 def create_app(test_config=None):
-    database_url = os.getenv("DATABASE_URL") or "sqlite:///smart_study_planner.db"
+    tidb_host = os.getenv("TIDB_HOST")
+    if tidb_host:
+        tidb_user = quote_plus(os.getenv("TIDB_USER") or "")
+        tidb_password = quote_plus(os.getenv("TIDB_PASSWORD") or "")
+        tidb_database = quote_plus(os.getenv("TIDB_DATABASE") or "test")
+        tidb_port = os.getenv("TIDB_PORT") or "4000"
+        database_url = (
+            f"mysql+pymysql://{tidb_user}:{tidb_password}@"
+            f"{tidb_host}:{tidb_port}/{tidb_database}"
+        )
+    else:
+        database_url = os.getenv("DATABASE_URL") or "sqlite:///smart_study_planner.db"
     if database_url.startswith("mysql://"):
         database_url = "mysql+pymysql://" + database_url[len("mysql://"):]
     instance_path = os.getenv("STUDYSMART_INSTANCE_PATH") or (
@@ -20,7 +32,7 @@ def create_app(test_config=None):
         instance_path=instance_path,
     )
     app.config.from_mapping(
-        APP_VERSION="2026.09.03.3",
+        APP_VERSION="2026.09.03.4",
         SECRET_KEY=os.getenv("SECRET_KEY") or "development-only",
         JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY") or "development-jwt-only",
         JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=int(os.getenv("SESSION_HOURS") or "8")),
@@ -28,6 +40,14 @@ def create_app(test_config=None):
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         MODEL_PATH=os.getenv("MODEL_PATH", "instance/oulad_random_forest.joblib"),
     )
+    if tidb_host:
+        app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+            "connect_args": {
+                "ssl_verify_cert": True,
+                "ssl_verify_identity": True,
+            },
+            "pool_pre_ping": True,
+        }
     if test_config:
         app.config.update(test_config)
     db.init_app(app)
