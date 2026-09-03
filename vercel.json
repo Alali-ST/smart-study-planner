@@ -4,8 +4,5 @@
     "app.py": {
       "excludeFiles": "{mobile/**,docs/**,backend/tests/**,backend/data/**,backend/test-temp/**,backend/instance/smart_study_planner.db,backend/instance/random_forest.joblib}"
     }
-  },
-  "rewrites": [
-    {"source": "/(.*)", "destination": "/app.py"}
-  ]
+  }
 }
