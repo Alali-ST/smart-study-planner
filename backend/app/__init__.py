@@ -12,9 +12,15 @@ def create_app(test_config=None):
     database_url = os.getenv("DATABASE_URL") or "sqlite:///smart_study_planner.db"
     if database_url.startswith("mysql://"):
         database_url = "mysql+pymysql://" + database_url[len("mysql://"):]
-    app = Flask(__name__, static_folder="../../web", static_url_path="")
+    instance_path = os.getenv("STUDYSMART_INSTANCE_PATH") or (
+        "/tmp/studysmart-instance" if os.getenv("VERCEL") else None
+    )
+    app = Flask(
+        __name__, static_folder="../../web", static_url_path="",
+        instance_path=instance_path,
+    )
     app.config.from_mapping(
-        APP_VERSION="2026.09.03.2",
+        APP_VERSION="2026.09.03.3",
         SECRET_KEY=os.getenv("SECRET_KEY") or "development-only",
         JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY") or "development-jwt-only",
         JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=int(os.getenv("SESSION_HOURS") or "8")),
