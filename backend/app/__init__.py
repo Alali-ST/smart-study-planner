@@ -2,7 +2,7 @@ import os
 import csv
 import click
 from datetime import timedelta
-from urllib.parse import quote_plus
+from urllib.parse import parse_qsl, quote_plus, urlencode, urlsplit, urlunsplit
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from sqlalchemy import inspect, text
@@ -24,6 +24,23 @@ def create_app(test_config=None):
         database_url = os.getenv("DATABASE_URL") or "sqlite:///smart_study_planner.db"
     if database_url.startswith("mysql://"):
         database_url = "mysql+pymysql://" + database_url[len("mysql://"):]
+    parsed_database_url = urlsplit(database_url)
+    is_tidb_connection = bool(
+        tidb_host
+        or (parsed_database_url.hostname and parsed_database_url.hostname.endswith("tidbcloud.com"))
+    )
+    if is_tidb_connection and parsed_database_url.query:
+        # TiDB's copied URLs can contain driver-specific SSL flags that
+        # PyMySQL does not recognise. TLS verification is configured below.
+        unsupported_ssl_flags = {
+            "sslaccept", "ssl-mode", "sslmode", "ssl_verify_cert", "ssl_verify_identity"
+        }
+        compatible_query = [
+            (key, value)
+            for key, value in parse_qsl(parsed_database_url.query, keep_blank_values=True)
+            if key.lower() not in unsupported_ssl_flags
+        ]
+        database_url = urlunsplit(parsed_database_url._replace(query=urlencode(compatible_query)))
     instance_path = os.getenv("STUDYSMART_INSTANCE_PATH") or (
         "/tmp/studysmart-instance" if os.getenv("VERCEL") else None
     )
@@ -32,7 +49,7 @@ def create_app(test_config=None):
         instance_path=instance_path,
     )
     app.config.from_mapping(
-        APP_VERSION="2026.09.03.4",
+        APP_VERSION="2026.09.04.1",
         SECRET_KEY=os.getenv("SECRET_KEY") or "development-only",
         JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY") or "development-jwt-only",
         JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=int(os.getenv("SESSION_HOURS") or "8")),
@@ -40,7 +57,7 @@ def create_app(test_config=None):
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         MODEL_PATH=os.getenv("MODEL_PATH", "instance/oulad_random_forest.joblib"),
     )
-    if tidb_host:
+    if is_tidb_connection:
         app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
             "connect_args": {
                 "ssl_verify_cert": True,

@@ -1,5 +1,5 @@
 const API = '/api/v1';
-const CLIENT_VERSION = '2026.09.03.4';
+const CLIENT_VERSION = '2026.09.04.1';
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));

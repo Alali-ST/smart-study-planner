@@ -103,8 +103,8 @@ def test_prediction_input_validation(client,auth):
 def test_health_exposes_matching_client_version(client):
     response=client.get("/api/v1/health")
     assert response.status_code==200
-    assert response.get_json()["app_version"] == "2026.09.03.4"
-    assert response.headers["X-StudySmart-Version"] == "2026.09.03.4"
+    assert response.get_json()["app_version"] == "2026.09.04.1"
+    assert response.headers["X-StudySmart-Version"] == "2026.09.04.1"
     page=client.get("/")
     assert page.headers["Cache-Control"].startswith("no-store")
     assert b'onclick="openPrediction(event)"' in page.data
